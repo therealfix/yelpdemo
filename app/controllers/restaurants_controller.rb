@@ -68,7 +68,7 @@ class RestaurantsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :phone, :website)
+    def restaurant_params   # Don't forget to add image after you've added it in form!
+      params.require(:restaurant).permit(:name, :address, :phone, :website, :image)
     end
 end

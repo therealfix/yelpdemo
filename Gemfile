@@ -18,3 +18,8 @@ gem 'rails_12factor', group: :production
 
 #use postgres for production
 gem 'pg', group: :production
+# 					#added github portion to try to fix NoMethodError
+gem 'carrierwave', github:'carrierwaveuploader/carrierwave' 
+gem "fog-aws"
+
+gem "figaro"

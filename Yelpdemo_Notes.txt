@@ -269,7 +269,7 @@ to end of Gemfile
 
 bundle install --without production
 _______________________
-How to shut down a Rails server in Windows if you've closed the git bash that started it
+How to shut down/restart a Rails server in Windows if you've closed the git bash that started it
 
 For SOME reason this does not work in git bash! Only git cmd!
 
@@ -278,6 +278,8 @@ cd yelpdemo
 netstat -a -o -n -> find using local address: 0.0.0.0:3000 and its pid
 
 taskkill /F /pid #### -> needs to be (/F)orcibly closed
+rails s -> git bash
+_______________________
 
 Add: gem 'sqlite3', group: :development
 gem 'pg', group: :production
@@ -295,23 +297,66 @@ heroku rename yelpdemo-kevinp
 
 git config -e
 
+to quit and return to git bash: :q in the new window
 
+Save! 
+git status
+git add .
+git commit -m "Added gems to heroku"
+git push
 
+Deploy your app to heroku, finally!
+git push heroku master
+
+instead of just rake db:migrate
+heroku run rake db:migrate
+
+Finally view live site:
+heroku open
+
+The restaurants from your localhost are not there - production(heroku) and development(localhost:3000) are completely separate.
 ___________________________________________________________
 5. Add Images
 	Add the Carrierwave Gem
 
-
-
+I think from now on I'll just refer to the transcript/notes of the video. No point simply repeating every little thing he says and does in the notes.
 ___________________________________________________________
 5. Image Hosting with Amazon S3
 
+Create a new file config/initializers/carrierwave.rb to put the chunk of code from https://github.com/carrierwaveuploader/carrierwave
 
+To prevent the NoMethodError that prevents the rails s from starting up,
+In Gemfile:
+change
+gem 'carrierwave' 
+to
+gem 'carrierwave', github:'carrierwaveuploader/carrierwave' 
 
+To fix "Excon::Errors::SocketError in RestaurantsController...":
+
+add:
+require 'rubygems' 
+require 'excon' 
+Excon.ssl_verify_peer = false 
+
+to the beginning of carrierwave.rb
 ___________________________________________________________
 5. Protect Our Passwords
 
+Instead of: 
+Figaro v0.7
+just put
+Figaro 1.0
 
+Instead of:
+rails generate figaro:install
+just put
+figaro install
+
+Instead of: 
+rake figaro:heroku
+just put
+figaro heroku:set -e production
 
 ___________________________________________________________
 5. Resize Images
