@@ -1,0 +1,447 @@
+General Notes:
+
+Bash will refer to mingw32, since I'm using windows.
+___________________________________________________________
+1. Get Up and Running
+	Installation for Non-Mac Users
+
+Trick for being able to use "subl" in mingw: (at least for windows vista):
+
+- Follow all steps in https://www.baserails.com/courses/yelpdemo/installation-for-non-mac-users
+
+- Download and install Git
+
+- Open sysdm.cpl -> Advanced -> Environment Variables
+
+- In Path, (mostly likely only the path for system variables but I also did it for user variables): put the file location for 
+
+C:\Program Files\Git\bin
+
+and add ;%SUBLIME% to the end of the user variable version
+
+and in system variables add: 
+
+variable name: SUBLIME
+variable value: C:\Program Files\Sublime Text 2
+
+ -In  C:\Program Files\Git\bin, add a file created with notepad (BUT NO FILE EXTENSION) with the following:
+
+#!/bin/sh
+"C:\Program Files\Sublime Text 2\sublime_text.exe" $1 &
+
+-Save this file as 'subl'
+
+-Now (finally) you should be able to open up an instance of sublime text in mingw32 by using entering 'subl'.
+
+- You can also open sublime text in the windows cmd: just enter sublime_text.exe
+
+
+___________________________________________________________
+2. Create Our Website
+	Create a New App
+
+Make sure the Git Bash you're using is the "rainbow" one, not the red one. 'Cause this one has pwd /c/Users/user, which is what you want.
+
+
+Before you can see the rails server on localhost:3000, 
+
+I did a bundle install, 
+
+
+___________________________________________________________
+2. Add Our First Pages
+
+As for opening a new tab of bash (in windows, it's MinGW32), the best you can do is open a new window of mingw32. 
+
+Also, doing rails s(erver) again while you haven't exited the server from the previous mingw32 will obviously give you the message, "A server is already running."
+
+And damn, maybe I should find a way to open up sublime text 2 from mingw32... maybe just changing the path in sysdm.cpl? Too fucking lazy to experiment with that at the moment though.
+
+___________________________________________________________
+2. Add Links
+
+Don't forget your http(s) in your external links!
+
+Application.html.erb is the default layout for all pages. Handy for putting links to all the different pages at the top, here.
+
+___________________________________________________________
+2. Add Restaurants
+
+Migration (database) steps: create it (rails generate scaffold Restaurant...)
+rake it (rake db:migrate)
+restart the server(ctrl-c, rails s)
+
+Annoying hacky fix to server not updating:
+bash1: rails s
+bash2: initiate migration, rake it. 
+bash1: ctrl-c shut down server
+bash2: start server
+
+either continue using bash1, or open up another bash to start using as your "main".
+
+If you miss a field in the generate scaffold:
+
+https://www.google.com/search?q=add+category+to+rails+scaffold&rlz=1C1CHFX_enCA499CA499&oq=add+category+to+rails+scaffold&aqs=chrome..69i57.6407j0j1&sourceid=chrome&es_sm=122&ie=UTF-8#q=rails+add+field+to+scaffold
+
+http://stackoverflow.com/questions/4805836/how-do-i-add-a-field-after-ive-run-rails-generate-model-scaffold
+
+http://stackoverflow.com/questions/28523853/rails-4-add-column-to-an-existing-scaffold
+
+http://stackoverflow.com/questions/10352832/adding-a-new-field-to-rails-model
+
+________________________
+So: if I missed the phone:string, I have to do this in bash: 
+
+rails g migration add_phone_to_Restaurant phone:string
+
+rake db:migrate
+
+Now, the fun part: have to manually alter views, controllers... (l stands for line)
+yelpdemo/app/controllers/concerns/restaurant_controller l72
+yelpdemo/app/views/restaurants/_form.html.erb l22
+yelpdemo/app/views/restaurants/index.html.erb l8, l19
+yelpdemo/app/views/restaurants/index.json.jbuilder l2
+yelpdemo/app/views/restaurants/show.html.erb l14
+yelpdemo/app/views/restaurants/show.json.jbuilder l1
+
+yelpdemo/db/migrate/timestamp_add_phone_to_Restaurant -> record of what you've done
+yelpdemo/db/migrate/schema.rb -> see that t.string "phone" has been updated into the restaurants table
+
+yelpdemo/test/controllers/restaurants_controller_test.rb
+yelpdemo/test/fixtures/restaurants.yml l6, l12
+
+Lesson learned: Fucking make sure your intial generation is correct before you do it! Don't fuck yourself in the ass!
+
+______________________
+Alternate! Try this: rolling back the migration with rake db:rollback STEP=1
+Don't have to manually change all the files, hopefully.
+
+http://stackoverflow.com/questions/26638930/adding-a-new-column-in-a-rails-database-migration
+
+______________________
+Note about localhost:3000:* showing a blank page (no error message) 
+(after mistakenly starting rails server in /c/Users/user instead of /c/Users/user/yelpdemo:
+
+Just. Restart. The. Computer. Don't know what causes this error.
+
+___________________________________________________________
+2. Set the Home Page
+
+Home Page: yelpdemo/config/routes.rb
+root 'restaurants/index'
+
+___________________________________________________________
+3. Get Started with Bootstrap
+	Install Bootstrap
+
+getbootstrap.com/getting-started
+
+copy cdn, paste to app/views/layouts/application.html.erb 
+
+right before </head>
+
+In app/views/restaurants/index.html.erb add this: <table class="table" table-hover table-condensed>
+
+___________________________________________________________
+3. Add a Navigation Bar
+
+Bootstrap compents navbar - add it to app/views/layouts/application.html.erb
+right after <body>
+
+Get rid of various unnecessary elements like the dropdowns and links simply by deleting/commenting out the html from bootstrap. Leave the search bar, though it doesn't work for now.
+
+Add the Yelpdemo, About, and Contact links.
+
+___________________________________________________________
+3. Simplify Our Code
+
+Create a partial - _navbar.html.erb
+
+<%= render 'layouts/navbar' %> right before 
+<%= yield %>
+
+<%= is for when there's something to be shown on the page e.g. link, navbar
+<% is for when there's nothing to be shown e.g. variable, starting a loop
+
+
+___________________________________________________________
+3. Build Beautiful Forms
+
+bootstrap css forms
+add form-control and form-group
+
+form-control:
+add , class: "form-control" 
+e.g.<%= f.text_field :name, class: "form-control"%>
+
+form-group:
+change div class="field" to
+<div class="form-group">
+
+Button:
+<%= f.submit %> change to 
+ <%= f.submit class: "btn btn-primary"%>
+
+Links:
+in edit.html.erb add
+,class: "btn btn-link"
+
+also change index.html.erb: 
+, class: "btn btn-link" right before the show/edit/destroy/new restauant elements
+
+also change show.html.erb: edit and back buttons
+
+also change new restaurant page:
+
+to application.html.erb:
+
+add a <div class="container-fluid">
+ 
+<%= yield %>
+<%= render 'layouts/footer' %>
+
+
+</div>
+___________________________________________________________
+4. Launch Our Site
+	Set Up Github
+
+Don't worry about ssh if you're not on a mac! ~Should~ be generated automatically when you installed rails on windows (though I have my doubts...)
+
+___________________________________________________________
+4. Save Our Progress
+
+First time:
+Set up repository on GitHub,
+go to yelpdemo folder, git init
+on github webiste user settings:
+"…or push an existing repository from the command line"
+run this:
+git remote add origin https://github.com/therealfix/yelpdemo.git
+
+(steps to save work to github)
+
+(1)git status - shows which files are tracked by git
+(2)git add . - prepares all files to be saved
+(3)git commit -m "Comment" - to save
+
+Push git commit to github: Through "…or push an existing repository from the command line"
+git push -u origin master
+
+(4) git push
+Note: only need git push after the first time!!!
+
+_______________________
+To get ssh keys working on windows: (to be able to use git push without having to enter username and password each time:)
+
+a-link. http://stackoverflow.com/questions/6565357/git-push-requires-username-and-password
+
+b-link. https://help.github.com/articles/generating-ssh-keys/
+
+a. In your github, check the right of the screen, should be a "HTTPS/SSH/Subversion clone URL". change it to SSH and copy the link.
+
+bash
+git remote set-url origin git@github.com:username/repo.git
+
+b. Step 1 should be fine, don't have to do step 2. Step 3, use eval %(ssh-agent -s), even though you ARE technically using Git Bash, it's still msysgit 'cause it's windows. Finish step 3, and 4 and 5. 
+___________________________________________________________
+4. Deploy on Heroku
+
+For SOME reason, heroku login does not work on the "rainbow" bash. Have to use red bash. 
+
+How to change default directory in bash:
+
+http://stackoverflow.com/questions/7671461/how-do-i-change-the-default-location-for-git-bash-in-windows
+
+Make a shortcut of git bash,
+right-click for properties,
+change start in: 
+C:\Users\user\yelpdemo
+
+To widen the git bash window,
+http://boje-techaswere1.blogspot.com/2013/09/how-to-widen-git-bash-window.html
+
+right click -> properties -> layout -> screen buffer size -> width
+
+Added 
+gem 'rails_12factor', group: :production 
+to end of Gemfile
+
+bundle install --without production
+_______________________
+How to shut down a Rails server in Windows if you've closed the git bash that started it
+
+For SOME reason this does not work in git bash! Only git cmd!
+
+Open git cmd
+cd yelpdemo
+netstat -a -o -n -> find using local address: 0.0.0.0:3000 and its pid
+
+taskkill /F /pid #### -> needs to be (/F)orcibly closed
+
+Add: gem 'sqlite3', group: :development
+gem 'pg', group: :production
+
+bundle install, then restart rails s after adding gems
+
+check ruby version with ruby -v,
+then in the Gemfile write ruby '2.1.5' or whichever version you have
+
+Deploy your app to heroku:
+heroku create
+
+rename the heroku app:
+heroku rename yelpdemo-kevinp
+
+git config -e
+
+
+
+___________________________________________________________
+5. Add Images
+	Add the Carrierwave Gem
+
+
+
+___________________________________________________________
+5. Image Hosting with Amazon S3
+
+
+
+___________________________________________________________
+5. Protect Our Passwords
+
+
+
+___________________________________________________________
+5. Resize Images
+
+
+
+___________________________________________________________
+6. Add Front-end Design
+	Create a Custom Banner
+
+
+
+___________________________________________________________
+6. Format the Navbar
+
+
+
+
+___________________________________________________________
+6. Add Static Images
+
+
+
+___________________________________________________________
+7. Add Users
+	Install Devise
+
+
+
+___________________________________________________________
+7. Insert Conditional Links
+
+
+
+___________________________________________________________
+7. Style Devise Forms
+
+
+
+___________________________________________________________
+7. Customize Alerts and Error Messages
+
+
+
+___________________________________________________________
+8. Add Reviews(I)
+	Build a Review Scaffold
+
+
+
+
+___________________________________________________________
+8. Link Reviews to Users
+
+
+
+___________________________________________________________
+8. Modify Data with Rails Console
+
+
+
+___________________________________________________________
+8. Remove Unnecessary URLs
+
+
+
+___________________________________________________________
+9. Add Reviews (II)
+	Link Reviews to Restaurants
+
+
+
+___________________________________________________________
+9. Nest Resource URLs
+
+
+
+___________________________________________________________
+9. Display Reviews
+
+
+
+___________________________________________________________
+10. Add Star Ratings
+	Convert Numbers to Stars
+
+
+
+___________________________________________________________
+10. Layer on More Options
+
+
+
+
+___________________________________________________________
+11. Set Validations and Permissions
+	Add User Fields
+
+
+
+___________________________________________________________
+11. Integrate names into Reviews
+
+
+
+___________________________________________________________
+11. Validate Submitted Data
+
+
+
+___________________________________________________________
+11.Set User Permissions
+
+
+
+___________________________________________________________
+12. Add Bells and Whistles
+	Embed Google Maps
+
+
+
+___________________________________________________________
+12. Set Up Search
+
+
+
+___________________________________________________________
+12. Course Summary
+
+
+
+
+
