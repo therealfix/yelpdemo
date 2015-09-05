@@ -35,6 +35,9 @@ variable value: C:\Program Files\Sublime Text 2
 
 - You can also open sublime text in the windows cmd: just enter sublime_text.exe
 
+___________________________________________________________
+Don't forget to install git bash on its own, as well. I mean the one from the git website, not just the prepackaged one that came with the default install.
+You'll need different versions of it to hack your way through. Such is the live of a windows programmer, unfortunately.
 
 ___________________________________________________________
 2. Create Our Website
@@ -361,7 +364,16 @@ figaro heroku:set -e production
 ___________________________________________________________
 5. Resize Images
 
+imagemagick: for windows
+http://www.imagemagick.org/script/binary-releases.php#windows
 
+shut down rails c with ctrl c, 
+restart both instances of bash,
+convert should now display imagemagick info.
+
+Note! To be able to see the ImageMagick version, you need to increase the screen buffer size, max 9999. Right click, properties, layout. Change screen buffer size height.
+
+Remember! Image resizing happens when you upload the file. So you need to delete then reupload the image to see any resizing.
 
 ___________________________________________________________
 6. Add Front-end Design
