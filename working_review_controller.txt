@@ -67,8 +67,15 @@ class ReviewsController < ApplicationController
       @review = Review.find(params[:id])
     end
 
+    # These review_params are the default, don't work
     # Never trust parameters from the scary internet, only allow the white list through.
+    #def review_params
+     # params[:review]
+    #end
+
+
+    #Taken from BaseRails GitHub master
     def review_params
-      params[:review]
+      params.require(:review).permit(:rating, :comment)
     end
 end
