@@ -16,6 +16,11 @@
 	<!--Use _navbar.html.erb-->
 	<%= render 'layouts/navbar' %>
 	<div class="container-fluid">
+
+		<!--From Devise -->
+		<p class="notice"><%= notice %></p>
+  		<p class="alert"><%= alert %></p>
+
 		<!--Put whatever is in views/pages here-->
 		<%= yield %>
 <%= render 'layouts/footer' %>

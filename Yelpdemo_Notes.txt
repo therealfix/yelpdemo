@@ -391,7 +391,8 @@ ___________________________________________________________
 7. Add Users
 	Install Devise
 
-
+config/environments/development
+config/environments/production -> change localhost to the actual application host.
 
 ___________________________________________________________
 7. Insert Conditional Links
