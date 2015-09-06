@@ -373,24 +373,19 @@ convert should now display imagemagick info.
 
 Note! To be able to see the ImageMagick version, you need to increase the screen buffer size, max 9999. Right click, properties, layout. Change screen buffer size height.
 
-Remember! Image resizing happens when you upload the file. So you need to delete then reupload the image to see any resizing.
+Remember!!! Image resizing happens when you upload the file. So you need to delete then reupload the image to see any resizing.
 
 ___________________________________________________________
 6. Add Front-end Design
 	Create a Custom Banner
-
-
-
 ___________________________________________________________
 6. Format the Navbar
 
-
-
-
+To do: Figure out how to install new font: Hobo Std
 ___________________________________________________________
 6. Add Static Images
 
-
+Don't forget to make the image uploaded to s3 public by right clicking it!
 
 ___________________________________________________________
 7. Add Users
