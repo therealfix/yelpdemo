@@ -16,10 +16,18 @@
 	<!--Use _navbar.html.erb-->
 	<%= render 'layouts/navbar' %>
 	<div class="container-fluid">
+		<!-- Devise alerts deleted in 7. Customise Alerts and Error Messages -->
 
-		<!--From Devise -->
-		<p class="notice"><%= notice %></p>
-  		<p class="alert"><%= alert %></p>
+		<!-- Alex's custom alert with dismissable button -->
+	<% flash.each do |name, msg| %>
+      <% if msg.is_a?(String) %>
+        <div class="alert alert-<%= name == "notice" ? "success" : "danger" %> alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        </div>
+      <% end %>
+    <% end %> 
+		
 
 		<!--Put whatever is in views/pages here-->
 		<%= yield %>
