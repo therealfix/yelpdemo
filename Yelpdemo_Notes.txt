@@ -402,7 +402,19 @@ Graphical bug: sign up and sign out are on a level underneath the main banner, e
 ___________________________________________________________
 7. Style Devise Forms
 
+In app/views/sesions/new.html.erb:
 
+<!-- Original: <div class="field">
+      Alex's original: <div>
+      Alex's changed: <div class="form-group">
+  	  One I went with: -->
+  <div class="field form-group">
+
+ <!-- Original: <div class="actions">
+      Alex's original: <div>
+      Alex's changed: <div class="form-group">
+  	  One I went with: -->
+  <div class="actions form-group">
 
 ___________________________________________________________
 7. Customize Alerts and Error Messages
