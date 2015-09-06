@@ -419,7 +419,8 @@ In app/views/sesions/new.html.erb:
 ___________________________________________________________
 7. Customize Alerts and Error Messages
 
-
+Not a big issue:
+Don't have the popup green popup Review was successfully created after I finish my review.
 
 ___________________________________________________________
 8. Add Reviews(I)
