@@ -484,13 +484,19 @@ Alex, do you have any idea why the review controller might default to what it wa
 ___________________________________________________________
 8. Link Reviews to Users
 
-
+added # placeholder to save with git msg so I could git commit the files that were changed in this lesson.
 
 ___________________________________________________________
 8. Modify Data with Rails Console
 
+Remember to give each review a user_id to avoid errors later on.
 
-
+with 
+> @reviews = Review.all
+> @reviews.each do |review|
+> review.user_id = 1
+> review.save
+> end
 ___________________________________________________________
 8. Remove Unnecessary URLs
 

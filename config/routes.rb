@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :reviews
+  # don't include show and index pages, not necessary and they don't exist anymore anyways
+  resources :reviews, except: [:show, :index]
 
   devise_for :users
   resources :restaurants
