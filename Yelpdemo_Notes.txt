@@ -507,8 +507,15 @@ Typing exit, then Enter.
 ___________________________________________________________
 8. Remove Unnecessary URLs
 
+Realllly watch out for typos here. For example:
 
+in reviews_controller.rb:
 
+def create
+    @review = Review.new(review_params)
+    @review.user_id = current_user.id
+    @review.restaurant_id = @restaurant.id
+# restaurant_id, then restaurant.id
 ___________________________________________________________
 9. Add Reviews (II)
 	Link Reviews to Restaurants
