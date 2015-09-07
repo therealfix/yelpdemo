@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   # don't include show and index pages, not necessary and they don't exist anymore anyways
-  resources :reviews, except: [:show, :index]
 
   devise_for :users
-  resources :restaurants
+  resources :restaurants do 
+    # This places the restaurant_id in the URL
+    resources :reviews, except: [:show, :index]
+  end
 
   get 'pages/about'
 

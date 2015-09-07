@@ -497,6 +497,13 @@ with
 > review.user_id = 1
 > review.save
 > end
+
+To exit the console:
+You could try:
+
+Ctrl D
+Ctrl Z and then Enter
+Typing exit, then Enter.
 ___________________________________________________________
 8. Remove Unnecessary URLs
 
