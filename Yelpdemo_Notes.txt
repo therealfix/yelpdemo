@@ -536,8 +536,9 @@ ___________________________________________________________
 10. Add Star Ratings
 	Convert Numbers to Stars
 
-
-
+Be very careful with your syntax here. E.g.
+<div class="star-rating" data-score= <%= review.rating %> ></div>
+									 # Don't forget the > > here!
 ___________________________________________________________
 10. Layer on More Options
 
