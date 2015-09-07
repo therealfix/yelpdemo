@@ -11,7 +11,12 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1.json
   def show
     #This defines the @reviews variable to be all reviews where the Review belongs to the current restaurant.
-    @reviews = Review.where(restaurant_id: @restaurant.id)
+    @reviews = Review.where(restaurant_id: @restaurant.id).order("created_at DESC")
+    if @reviews.blank?
+      @avg_rating = 0
+    else
+      @avg_rating = @reviews.average(:rating).round(2)
+    end 
   end
 
   # GET /restaurants/new
