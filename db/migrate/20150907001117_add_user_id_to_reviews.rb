@@ -3,3 +3,4 @@ class AddUserIdToReviews < ActiveRecord::Migration
     add_column :reviews, :user_id, :integer
   end
 end
+# placeholder to save with git msg

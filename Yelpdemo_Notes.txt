@@ -382,7 +382,7 @@ ___________________________________________________________
 6. Format the Navbar
 
 To do: Figure out how to install new font: Hobo Std
-->Done! Must have been a typo. 
+->Done! I believe you need to install the font on the local machine to get it to work.
 ___________________________________________________________
 6. Add Static Images
 

@@ -8,3 +8,4 @@ class User < ActiveRecord::Base
 
 
 end
+# placeholder to save with git msg
