@@ -33,7 +33,8 @@
     <!--Images use file_field -->
     <%= f.file_field :image, class: "form-control" %>
   </div>
-  <div class="actions">
+  <!--Not sure if "mandatory" but changed from class="actions" to class="form-group"-->
+  <div class="form-group">
     <%= f.submit class: "btn btn-primary"%>
   </div>
 <% end %>
