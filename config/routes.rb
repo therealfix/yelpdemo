@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :restaurants do 
+    collection do
+      get 'search'
+    end
     # This places the restaurant_id in the URL
     resources :reviews, except: [:show, :index]
   end

@@ -575,7 +575,9 @@ ___________________________________________________________
 ___________________________________________________________
 12. Set Up Search
 
+Elasticsearch must be installed with elevated cmd!
 
+If it isn't clear enough, command prompt (not git bash!) run as administrator!
 
 ___________________________________________________________
 12. Course Summary
