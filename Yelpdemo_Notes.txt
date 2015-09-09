@@ -584,5 +584,99 @@ ___________________________________________________________
 
 
 
+___________________________________________________________
+13. Add a Facebook 'Like' Button
 
+Added like button to app/views/restaurants/show.html.erb but they are not showing up each time. 
+-> Maybe because I'm using localhost? And data-href="http://yelpdemo-kevinp.herokuapp.com"
+
+Have to go to the restaurant show page and reload the page for the like button to appear.  
+
+Installed Chrome extension "Page Ruler" - way simpler than writing out code to figure out exact dimensions of elements. 
+
+Facebook like button length: 78 -86 (claimed default 90)px depending on # of people liking it
+Facebook like button width: 20 px
+
+
+Diagram to explain:
+
+Fullscreen dimensions using Page Ruler:
+
+                    col-md-3: 363px
+_______________________________________________________
+|                                                      |
+|     Google Maps Embed API: 230                       |
+|                                                      |
+| Shitty little padding at the left of maps: 15        |
+| _____________________________________                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |                                   |                |
+| |___________________________________|                |
+|                   |                                  |
+|   Halfway point: 230/2 = 115 (Maps edge to center)   |
+|   left side col-md-3 to center of maps: 115 + 15     |
+|   = 130                                              |
+|             __________  ____                         |
+|             |  Like  | / 0 |                         |
+|             |________| \___|                         |
+|                                                      |
+|           Avg like btn width: 80                     |
+|           Half of like btn: 80/2 = 40                |
+|                                                      |
+|  therefore, css left: 130 - 40 = 90                  |
+|______________________________________________________|                                                      
+Fuck that took so long.
+
+The dimensions are also found on 
+https://developers.facebook.com/docs/plugins/like-button
+
+Ok, figured out how to center the facebook button. 
+1. HTML: app/views/restaurants/show.html.erb
+  Wrap button in 
+
+  <div id="facebook_button">
+    <div class="fb-like" ... >
+    </div>
+  </div>
+
+2. CSS: app/assets/stylesheets/custom.css.scss
+  #facebook_button {
+    position: absolute;
+    left: 90px;
+  }
+
+3. HTML: app/views/restaurants/show.html.erb
+  Add <br> tags around button so reviews don't vertically overlap.
+
+
+___________________________________________________________
+
+
+
+___________________________________________________________
+
+
+
+___________________________________________________________
+Final Clean up and To Do:
+
+Get rid of edit/delete buttons on app/views/restaurants/show.html.erb.
+A guy already found a way to do it, find that comment in one of the video discussions.
+
+Overlapping text with google maps in restaurants show page. Took a screenie
+
+Facebook Button: figure out how to make it appear every time, and to center it in the col-md-3 under Google Maps.
 

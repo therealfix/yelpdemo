@@ -34,3 +34,31 @@
 .container-fluid {
 	padding: 10px 120px;
 }
+
+/* Taken from 
+http://stackoverflow.com/questions/9382970/how-to-center-a-div-with-bootstrap */
+#facebook_button {
+	position: absolute;
+	left: 90px;
+	/*
+	position: relative;
+  	top: 50%;
+  	left:50%;
+  	*/
+
+	/*
+	float: none;
+    margin: 0 auto;
+    */
+	/*
+    margin-left: auto;
+    margin-right: auto;
+    */
+}
+
+/* From bootstrap website */
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,43 +1,62 @@
-<div class="row">
+<div class="row" >
 	<div class="col-md-3">
 		<%= image_tag @restaurant.image_url %>
 
-<h2>
-  <%= @restaurant.name %>
-</h2>
+		<h2>
+  			<%= @restaurant.name %>
+		</h2>
 
-<div class="star-rating" data-score= <%= @avg_rating %> ></div>
-<p><%= "#{@reviews.length} reviews" %></p>
+		<div class="star-rating" data-score= <%= @avg_rating %> ></div>
+		<p><%= "#{@reviews.length} reviews" %></p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
+		<p>
+  			<strong>Address: </strong><%= @restaurant.address %>
+		</p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @restaurant.phone %>
-</p>
+		<p>
+  			<strong>Phone: </strong>
+  			<%= @restaurant.phone %>
+		</p>
 
-<p>
-  <strong>Website:</strong>
-  <%= link_to @restaurant.website, @restaurant.website %>
-</p>
+		<p>
+  			<strong>Website: </strong><%= link_to @restaurant.website, @restaurant.website %>
+		</p>
 
-<%= link_to "Write a Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
-<br>
-<br>
-<iframe 	
-	width="230"
-	height="230" 
-	frameborder="0" 
-	style="border:0"
-	src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAxDGWcTMshZFlgRn1q14poysm9IfVW4b8&q=<%= @restaurant.address.parameterize %>&zoom=14">
-</iframe>
-	
+		<%= link_to "Write a Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+		<br>
+		<br>
+		
+		<iframe
+			id="google_maps"
+			width="230"
+			height="230" 
+			frameborder="0" 
+			style="border:0"
+			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAxDGWcTMshZFlgRn1q14poysm9IfVW4b8&q=<%= @restaurant.address.parameterize %>&zoom=14">
+		</iframe>
+
+		<br>
+		<br>
+
+		<div id="facebook_button">
+			<div class="fb-like" data-href="http://yelpdemo-kevinp.herokuapp.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false">
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<!-- This script gets the width of an element based on its id. I tried finding the width of the button above by adding id="fb-btn", but apparently facebook is too secretive to allow my script to access its width. 
+
+		A good alternative is using chrome extension "Page Ruler". 
+
+		<script type="text/javascript">
+    		var width = document.getElementById('fb-btn').offsetWidth;    		
+    		document.write("The width of the fb button is apparently " + width);
+  		</script>
+		-->
+
 	</div>
-
-
 
 	<div class="col-md-9">
 		<% if @reviews.blank? %>
@@ -55,7 +74,6 @@
 				<tbody>
 					<% @reviews.each do |review| %>
 						<tr>
-
 							<td>
 								<h4>
 									<%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %>
