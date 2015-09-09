@@ -588,9 +588,25 @@ ___________________________________________________________
 13. Add a Facebook 'Like' Button
 
 Added like button to app/views/restaurants/show.html.erb but they are not showing up each time. 
--> Maybe because I'm using localhost? And data-href="http://yelpdemo-kevinp.herokuapp.com"
+Solution: 
+http://stackoverflow.com/questions/20338619/fb-like-button-shows-up-only-once-on-first-load-of-my-angularjs-view 
+
+<div id="fb-root"></div> 
+<script> 
+// Add FB =null; 
+FB = null; 
+(function(d, s, id) { 
+var js, fjs = d.getElementsByTagName(s)[0]; 
+// comment out the if statement 
+//if (d.getElementById(id)) return; 
+js = d.createElement(s); js.id = id; 
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4"; 
+fjs.parentNode.insertBefore(js, fjs); 
+}(document, 'script', 'facebook-jssdk'));</script> 
 
 Have to go to the restaurant show page and reload the page for the like button to appear.  
+
+____________________________
 
 Installed Chrome extension "Page Ruler" - way simpler than writing out code to figure out exact dimensions of elements. 
 
@@ -677,6 +693,9 @@ Get rid of edit/delete buttons on app/views/restaurants/show.html.erb.
 A guy already found a way to do it, find that comment in one of the video discussions.
 
 Overlapping text with google maps in restaurants show page. Took a screenie
+_____________________
+Search bar isn't working again. Search for "donut" in localhost:
 
-Facebook Button: figure out how to make it appear every time, and to center it in the col-md-3 under Google Maps.
+Faraday::ConnectionFailed in RestaurantsController#search
 
+Oddly, the search still works in heroku.
