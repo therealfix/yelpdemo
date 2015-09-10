@@ -564,7 +564,13 @@ ___________________________________________________________
 ___________________________________________________________
 11.Set User Permissions
 
+Added this to app/views/restaurants/show.html.erb
 
+# check if user is signed in and an admin and only show the "Edit" link to admin users 
+<% if user_signed_in? && current_user.admin? %> 
+<%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "btn btn-link" %> | 
+<% end %> 
+<%= link_to 'Back', restaurants_path, class: "btn btn-link" %> 
 
 ___________________________________________________________
 12. Add Bells and Whistles
@@ -579,10 +585,37 @@ Elasticsearch must be installed with elevated cmd!
 
 If it isn't clear enough, command prompt (not git bash!) run as administrator!
 
+
+C:\Desktop\Kevin_practice\BaseRails Ruby on Rails\elasticsearch-1.7.1\elasticsearch-1.7.1\bin
+
+My comment:
+
+For Windows users, after you've restarted your computer, the search function will not work in localhost! Unless... 
+
+In my dropbox: 
+https://www.dropbox.com/sh/27uvm2qdjjeugob/AACMrqiJCeJExrVtP4aCc7JKa?dl=0 
+
+You open an elevated command prompt, cd ...elasticsearch-1.7.1\bin, service.bat, service start (again). (see example windows cmd for elasticsearch.JPG. I'd already installed the service previously) 
+
+For some reason, elasticsearch has to be manually restarted. Or else you will get a Faraday::ConnectionFailed in RestaurantsController#Search error (see "search not working in localhost.jpg) 
+
+Alex, is there any way to get the elasticsearch service to reinstall itself automatically, say once you run rails s? I suppose it's not worth the hassle though, considering you'd have to come up with a batch file and link that to the yelpdemo project proper... and adding that might interfere with production (the search function works as expected on heroku). Not worth spending hours to save seconds - it's just the localhost after all. I guess it's just another one to add to the list of Windows compat issues! 
+
 ___________________________________________________________
 12. Course Summary
 
+Comment:
 
+Hey Alex, I just finished the course, I learned a LOT and it's definitely worth WAY MORE than the price of admission, especially with your help. Here's my live app, not that it's much different than yours (yet) yelpdemo-kevinp.herokuapp.com 
+
+I wanted to ask where you'd recommend researching to further polish the site's styling: 
+https://www.dropbox.com/sh/ubbuutqu3x67uyb/AABGcucT_E60AOEH1tmxy5yta?dl=0 
+
+1. For the navbar, to never have it drop down to two levels 
+2. To prevent reviews from smushing into the the left side 
+3. Are you planning to teach testing/mobile interfaces? I'd love to apply it to my yelpdemo, I've grown attached to it, since it's my first "real" site 
+
+I guess the only thing to do now is to move on to Etsydemo! :)
 
 ___________________________________________________________
 13. Add a Facebook 'Like' Button
@@ -690,12 +723,9 @@ ___________________________________________________________
 Final Clean up and To Do:
 
 Get rid of edit/delete buttons on app/views/restaurants/show.html.erb.
-A guy already found a way to do it, find that comment in one of the video discussions.
+A guy already found a way to do it, find that comment in one of the video discussions. Look in 11. Set User Permissions
 
-Overlapping text with google maps in restaurants show page. Took a screenie
+CSS styling finishing touches and overlapping text with google maps in restaurants show page. Took a screenie.
+Also mobile interfaces, testing.
+ - commented already in 12. Course Summary
 _____________________
-Search bar isn't working again. Search for "donut" in localhost:
-
-Faraday::ConnectionFailed in RestaurantsController#search
-
-Oddly, the search still works in heroku.
