@@ -639,6 +639,12 @@ fjs.parentNode.insertBefore(js, fjs);
 
 Have to go to the restaurant show page and reload the page for the like button to appear.  
 
+Alternate: based on Alex's comment
+
+http://blog.flightswithfriends.com/post/53943440505/how-to-disable-turbolinks-in-rails-4
+
+My comment: "All I had to do to keep using the original _facebook.html.erb was add "data-no-turbolink" to the body tag in application.html.erb."
+
 ____________________________
 
 Installed Chrome extension "Page Ruler" - way simpler than writing out code to figure out exact dimensions of elements. 
@@ -710,6 +716,25 @@ Ok, figured out how to center the facebook button.
 3. HTML: app/views/restaurants/show.html.erb
   Add <br> tags around button so reviews don't vertically overlap.
 
+____________________________
+Like Button changes to be made: 
+  - change like button to refer to each restaurant, not just the homepage as I have it set up now, which is data-href="http://yelpdemo-kevinp.herokuapp.com". 
+
+  - Also, like button must refer to yelpdemo-kevinp and not localhost, like button cannot be applied to localhost. Therefore testing for the button must be done on production.
+
+
+  - Find way to access admin credentials on heroku run rails c (refer to 8. Modify Data with Rails Console and 11. Add User Fields)
+
+  https://www.baserails.com/courses/yelpdemo/modify-data-with-rails-console
+  https://www.baserails.com/courses/yelpdemo/add-user-fields
+
+  admin: alice@yelpdemo.com
+  password: kevin436
+
+  DONE - Create 10 restaurants in heroku 
+
+  - Verify that like button does indeed show for each restaurant.
+
 
 ___________________________________________________________
 
@@ -722,8 +747,7 @@ ___________________________________________________________
 ___________________________________________________________
 Final Clean up and To Do:
 
-Get rid of edit/delete buttons on app/views/restaurants/show.html.erb.
-A guy already found a way to do it, find that comment in one of the video discussions. Look in 11. Set User Permissions
+Figure out way to see heroku's postgres database without using heroku run rails c.
 
 CSS styling finishing touches and overlapping text with google maps in restaurants show page. Took a screenie.
 Also mobile interfaces, testing.
