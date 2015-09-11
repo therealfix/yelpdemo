@@ -8,8 +8,6 @@
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
-      <!--Temporarily put id in the table -->
-      <th>ID</th>
       <th>Name</th>
       <th>Address</th>
       <th>Phone</th>
@@ -23,8 +21,6 @@
   <tbody>
     <% @restaurants.each do |restaurant| %>
       <tr>
-        <!--Temporarily put id in the table -->
-        <td><%= restaurant.id %></td>
         <td><%= link_to restaurant.name, restaurant %></td>
         <td><%= restaurant.address %></td>
         <td><%= restaurant.phone %></td>
